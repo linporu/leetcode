@@ -27,6 +27,8 @@ class Solution02:
     def majorityElement(self, nums: List[int]) -> int:
         """使用 Boyer-Moore Voting Algorithm 找出多數元素。
 
+        這個演算法對於「找出某個元素數量是否超過總體某個門檻」非常有用。
+
         原理說明：
         1. 此算法基於「多數元素出現次數 > n/2」的特性
         2. 使用計數器(count)和候選人(candidate)進行追蹤：
