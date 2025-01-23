@@ -1,29 +1,38 @@
+from typing import Optional
+
+
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution:
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+class Solution01:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        head_copy = head
+        ptr = head
         counter = 0
 
-        while True:
-            if head_copy.next:
-                counter += 1
-                head_copy = head_copy.next
-                print(head_copy.val)
-            else:
-                break
+        # 數總共有幾個 node
+        while ptr:
+            counter += 1
+            ptr = ptr.next
 
-        head_copy = head
+        # 重置指針，讓它跑到中間
+        ptr = head
+        for _ in range(counter // 2):
+            ptr = ptr.next
 
-        if counter & 1 == 1:
-            for _ in range(int((counter + 1) / 2)):
-                head_copy = head_copy.next
-                
-        else:
-            for _ in range(int(counter / 2)):
-                head_copy = head_copy.next
+        return ptr
 
-        return head_copy
+
+# 快慢指針
+class Solution02:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast, slow = head, head
+
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+
+        return slow
