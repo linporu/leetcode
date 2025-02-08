@@ -7,7 +7,27 @@
 - [704. Binary Search](https://leetcode.com/problems/binary-search/) (二分搜尋基礎題)
 - [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/) (二分搜尋的應用)
 - [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) (陣列操作)
-- [1. Two Sum](https://leetcode.com/problems/two-sum/) (HashMap 應用)
+
+### 雜湊表 (Hash Table)
+
+#### 基礎應用
+
+- [1. Two Sum](https://leetcode.com/problems/two-sum/) (基本 HashMap 使用)
+- [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) (基礎查重)
+- [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) (字符頻率統計)
+- [383. Ransom Note](https://leetcode.com/problems/ransom-note/) (字符統計應用)
+
+#### 中級應用
+
+- [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/) (字符分組)
+- [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) (連續序列)
+- [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) (前綴和 + HashMap)
+- [454. 4Sum II](https://leetcode.com/problems/4sum-ii/) (多數組合問題)
+
+#### 進階應用
+
+- [146. LRU Cache](https://leetcode.com/problems/lru-cache/) (HashMap + 雙向鏈結串列)
+- [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) (HashMap + 陣列)
 
 ### 字串處理 (String Manipulation)
 
@@ -24,11 +44,21 @@
 
 ## 第三週：二元樹 (Binary Tree)
 
+### 基礎觀念 (Tree Traversal & Basic Concepts)
+
+- [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) (中序遍歷基礎)
+- [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/) (樹深度概念)
 - [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) (基礎樹操作)
-- [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/) (DFS 基礎)
-- [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) (樹的遍歷)
+
+### 基礎應用
+
 - [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) (樹的對稱性)
-- [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) (進階應用)
+- [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/) (平衡樹概念)
+
+### 進階應用
+
+- [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) (路徑問題)
+- [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) (祖先問題)
 
 ## 第四週：動態規劃與其他
 
@@ -48,7 +78,11 @@
 
 ### 每週重點
 
-1. 第一週：熟悉基本的陣列操作和二分搜尋
+1. 第一週：
+   - 熟悉基本的陣列操作和二分搜尋
+   - 掌握 HashMap/HashSet 的基本使用
+   - 練習字符頻率統計相關題目
+   - 嘗試解決中級 Hash Table 應用題
 2. 第二週：掌握鏈結串列的基本操作和常用技巧
 3. 第三週：理解樹的概念和遍歷方式
 4. 第四週：學習基礎動態規劃和其他重要演算法概念
@@ -57,6 +91,7 @@
 
 - 每題先嘗試自己解決（建議時間限制 30 分鐘）
 - 解題後務必複習時間複雜度和空間複雜度
+- 特別注意 Hash Table 題目的空間使用效率
 - 思考相似題目的解題模式
 - 記錄常用的解題技巧和模板
 

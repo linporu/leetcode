@@ -19,12 +19,94 @@
 
 ### 1.3 雜湊表（Hash Table）
 
-- 計數與查找
+#### 1.3.1 基礎應用
+
+- 基本查找
   - [1] Two Sum：使用 HashMap 優化查找
-  - [383] Ransom Note：字符頻率統計
-- 多數元素問題
-  - [169] Majority Element：基本多數元素
-  - [229] Majority Element II：進階多數元素
+  - [217] Contains Duplicate：使用 HashSet 處理重複元素
+- 字符頻率統計
+  - [242] Valid Anagram：字符頻率對比
+  - [383] Ransom Note：字符頻率統計與比較
+  - [49] Group Anagrams：字符分組應用
+
+#### 1.3.2 進階應用
+
+- 序列處理
+  - [128] Longest Consecutive Sequence：連續序列查找
+  - [560] Subarray Sum Equals K：前綴和 + HashMap
+- 組合問題
+  - [454] 4Sum II：多數組合的優化
+
+#### 1.3.3 高級應用
+
+- 複合數據結構
+  - [146] LRU Cache：HashMap + 雙向鏈結串列
+  - [380] Insert Delete GetRandom O(1)：HashMap + 動態陣列
+
+#### 1.3.4 常見解題模式
+
+1. 基本 HashMap 使用：
+
+```python
+# 建立 HashMap
+hash_map = {}
+# 儲存值
+hash_map[key] = value
+# 檢查鍵是否存在
+if key in hash_map:
+    # 處理邏輯
+```
+
+2. 字符頻率統計：
+
+```python
+# 使用 Counter
+from collections import Counter
+counter = Counter(string)
+
+# 或使用 dict
+freq = {}
+for char in string:
+    freq[char] = freq.get(char, 0) + 1
+```
+
+3. 前綴和 + HashMap：
+
+```python
+prefix_sum = 0
+prefix_map = {0: 1}  # 初始化
+for num in nums:
+    prefix_sum += num
+    if prefix_sum - target in prefix_map:
+        # 找到符合條件的子陣列
+```
+
+4. HashSet 應用：
+
+```python
+# 建立 HashSet
+num_set = set(nums)
+# 檢查元素
+if num in num_set:
+    # 處理邏輯
+```
+
+#### 1.3.5 效能考量
+
+1. 時間複雜度：
+
+   - 查找/插入/刪除：平均 O(1)
+   - 最壞情況：O(n)（發生 hash collision）
+
+2. 空間複雜度：
+
+   - 通常需要 O(n) 的額外空間
+   - 需要考慮空間與時間的取捨
+
+3. 常見優化：
+   - 選擇適當的初始容量
+   - 處理 hash collision
+   - 適當的 load factor
 
 ### 1.4 鏈結串列（Linked List）
 
