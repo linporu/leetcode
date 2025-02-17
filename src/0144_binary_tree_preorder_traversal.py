@@ -24,3 +24,23 @@ class Solution01:
         result = []
         dfs(root, result)
         return result
+
+
+# Iterative method
+class Solution02:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+
+        result = []
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+            result.append(current.val)
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
+
+        return result
