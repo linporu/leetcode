@@ -36,11 +36,11 @@ class Solution02:
         stack = [root]
 
         while stack:
-            current = stack.pop()
-            result.append(current.val)
-            if current.right:
-                stack.append(current.right)
-            if current.left:
-                stack.append(current.left)
+            node = stack.pop()
+            result.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
 
         return result
