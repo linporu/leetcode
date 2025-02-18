@@ -73,16 +73,16 @@ class Solution03:
         stack = [(p, q)]
 
         while stack:
-            node1, node2 = stack.pop()
+            node_1, node_2 = stack.pop()
 
-            if not node1 and not node2:
+            if not node_1 and not node_2:
                 continue
-            if not node1 or not node2:
+            if not node_1 or not node_2:
                 return False
-            if node1.val != node2.val:
+            if node_1.val != node_2.val:
                 return False
 
-            stack.append((node1.right, node2.right))
-            stack.append((node1.left, node2.left))
+            stack.append((node_1.right, node_2.right))
+            stack.append((node_1.left, node_2.left))
 
         return True
