@@ -23,3 +23,21 @@ class Solution01:
         result = []
         dfs(root, result)
         return result
+
+
+# Iterative method
+class Solution02:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        stack = []
+        current = root
+
+        while stack or current:
+            while current:
+                stack.append(current)
+                current = current.left
+            current = stack.pop()
+            result.append(current.val)
+            current = current.right
+
+        return result
