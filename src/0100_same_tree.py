@@ -9,6 +9,7 @@ class TreeNode:
         self.right = right
 
 
+# Recursive method
 class Solution01:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
 
@@ -28,7 +29,7 @@ class Solution01:
         return check(p, q)
 
 
-# Refactored
+# Recursive method refactored
 class Solution02:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         """重構改進說明：
@@ -59,19 +60,29 @@ class Solution02:
         return check(p, q)
 
 
-# Refactored
+# Iterative method
 class Solution03:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        """重構改進說明：
-        移除了額外的 check 輔助函數，使用 self.isSameTree 進行遞迴調用，直接在主函數中實現遞迴
-        """
-        # 兩個節點都是 None，代表相同
+
+        # Base cases
         if not p and not q:
             return True
-        # 其中一個是 None，另一個不是，代表不同
         if not p or not q:
             return False
-        # 檢查當前節點值是否相同，以及左右子樹是否相同
-        return (
-            p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-        )
+
+        stack = [(p, q)]
+
+        while stack:
+            node1, node2 = stack.pop()
+
+            if not node1 and not node2:
+                continue
+            if not node1 or not node2:
+                return False
+            if node1.val != node2.val:
+                return False
+
+            stack.append((node1.right, node2.right))
+            stack.append((node1.left, node2.left))
+
+        return True
