@@ -57,3 +57,21 @@ class Solution02:
             )
 
         return check(p, q)
+
+
+# Refactored
+class Solution03:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        """重構改進說明：
+        移除了額外的 check 輔助函數，使用 self.isSameTree 進行遞迴調用，直接在主函數中實現遞迴
+        """
+        # 兩個節點都是 None，代表相同
+        if not p and not q:
+            return True
+        # 其中一個是 None，另一個不是，代表不同
+        if not p or not q:
+            return False
+        # 檢查當前節點值是否相同，以及左右子樹是否相同
+        return (
+            p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        )
