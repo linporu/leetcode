@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution01:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         # Base case
         if not root:
@@ -24,3 +24,21 @@ class Solution:
         root.right = self.invertTree(temp_left)
 
         return root
+
+
+# With helper function
+class Solution02:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+        def invert(node):
+            if node is None:
+                return None
+
+            temp_left = node.left
+            temp_right = node.right
+            node.left = invert(temp_right)
+            node.right = invert(temp_left)
+
+            return node
+
+        return invert(root)
