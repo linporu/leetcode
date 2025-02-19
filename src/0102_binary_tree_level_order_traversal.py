@@ -26,3 +26,31 @@ class Solution01:
         result = []
         dfs(root, 0, result)
         return result
+
+
+# Iterative method
+class Solution02:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        from collections import deque
+
+        if not root:
+            return []
+
+        queue = deque([root])
+        result = []
+
+        while queue:
+            current_level = []
+            level_length = len(queue)
+
+            for _ in range(level_length):
+                node = queue.popleft()
+                current_level.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+            result.append(current_level)
+
+        return result
