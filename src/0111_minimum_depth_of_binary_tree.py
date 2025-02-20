@@ -28,7 +28,6 @@ class Solution01:
                 if not node.left and not node.right:
                     return min_depth
                 if node.left:
-
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
