@@ -8,7 +8,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
+# Recursive DFS
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         def dfs(node):
