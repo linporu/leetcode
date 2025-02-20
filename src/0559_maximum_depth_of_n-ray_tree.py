@@ -8,7 +8,8 @@ class Node:
         self.children = children
 
 
-class Solution:
+# Recursive DFS
+class Solution01:
     def maxDepth(self, root: 'Node') -> int:
         def dfs(node):
             # Base case
@@ -24,3 +25,26 @@ class Solution:
             return max_depth + 1
 
         return dfs(root)
+
+
+# Iterative BFS
+class Solution02:
+    def maxDepth(self, root: 'Node') -> int:
+        from collections import deque
+
+        if not root:
+            return 0
+
+        depth = 0
+        queue = deque([root])
+
+        while queue:
+            depth += 1
+            level_size = len(queue)
+
+            for _ in range(level_size):
+                node = queue.popleft()
+                if node.children:
+                    queue.extend(node.children)
+
+        return depth
