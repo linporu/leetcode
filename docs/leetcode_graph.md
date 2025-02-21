@@ -66,6 +66,8 @@
 
 ### 1. 圖的遍歷練習（由易到難）
 
+#### Easy 題目
+
 1. [733. Flood Fill](https://leetcode.com/problems/flood-fill/) (Easy)
 
    - 核心技巧：DFS/BFS 基礎應用
@@ -76,7 +78,28 @@
      - 格子圖的遍歷
      - 訪問標記的處理
 
-2. [200. Number of Islands](https://leetcode.com/problems/number-of-islands/) (Medium)
+2. [1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/) (Easy)
+
+   - 核心技巧：基本圖遍歷
+   - 時間複雜度：O(V+E)
+   - 空間複雜度：O(V)
+   - 學習重點：
+     - 圖的連通性判斷
+     - DFS/BFS 的選擇
+     - 基本圖結構操作
+
+3. [463. Island Perimeter](https://leetcode.com/problems/island-perimeter/) (Easy)
+   - 核心技巧：網格遍歷
+   - 時間複雜度：O(n×m)
+   - 空間複雜度：O(1)
+   - 學習重點：
+     - 邊界判斷
+     - 相鄰關係處理
+     - 網格特性應用
+
+#### Medium 題目
+
+1. [200. Number of Islands](https://leetcode.com/problems/number-of-islands/) (Medium)
 
    - 核心技巧：連通分量計數
    - 時間複雜度：O(n×m)
@@ -86,7 +109,7 @@
      - 連通分量的識別
      - 訪問標記的優化
 
-3. [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/) (Medium)
+2. [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/) (Medium)
 
    - 核心技巧：圖的連通性
    - 時間複雜度：O(n²)
@@ -96,7 +119,7 @@
      - DFS/BFS vs 並查集
      - 不同解法的比較
 
-4. [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/) (Medium)
+3. [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/) (Medium)
    - 核心技巧：路徑搜索
    - 時間複雜度：O(2^n)
    - 空間複雜度：O(n)
@@ -106,6 +129,29 @@
      - 有向無環圖特性
 
 ### 2. 最短路徑練習（由易到難）
+
+#### Easy 題目
+
+1. [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/) (Easy)
+
+   - 核心技巧：BFS 最短路徑
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)，w 為樹的最大寬度
+   - 學習重點：
+     - BFS 找最短路徑
+     - 層次遍歷
+     - 終止條件判斷
+
+2. [1030. Matrix Cells in Distance Order](https://leetcode.com/problems/matrix-cells-in-distance-order/) (Easy)
+   - 核心技巧：距離排序
+   - 時間複雜度：O(n×m×log(n×m))
+   - 空間複雜度：O(n×m)
+   - 學習重點：
+     - 曼哈頓距離
+     - BFS 應用
+     - 矩陣座標處理
+
+#### Medium 題目
 
 1. [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/) (Medium)
 
@@ -136,7 +182,20 @@
      - 動態規劃思想
      - 狀態轉移設計
 
-### 3. 拓撲排序練習
+### 3. 拓撲排序練習（由易到難）
+
+#### Easy 題目
+
+1. [2192. All Ancestors of a Node in a Directed Acyclic Graph](https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/) (Easy)
+   - 核心技巧：有向圖遍歷
+   - 時間複雜度：O(V×(V+E))
+   - 空間複雜度：O(V×V)
+   - 學習重點：
+     - 有向無環圖概念
+     - 祖先節點的尋找
+     - 依賴關係的處理
+
+#### Medium 題目
 
 1. [207. Course Schedule](https://leetcode.com/problems/course-schedule/) (Medium)
 
@@ -157,7 +216,30 @@
      - 入度統計與更新
      - 隊列使用技巧
 
-### 4. 並查集練習
+### 4. 並查集練習（由易到難）
+
+#### Easy 題目
+
+1. [1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/) (Easy)
+
+   - 核心技巧：並查集基礎
+   - 時間複雜度：O(V+E)
+   - 空間複雜度：O(V)
+   - 學習重點：
+     - 並查集基本操作
+     - 連通性判斷
+     - 路徑存在性檢查
+
+2. [2421. Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/) (Easy)
+   - 核心技巧：並查集應用
+   - 時間複雜度：O(n×α(n))
+   - 空間複雜度：O(n)
+   - 學習重點：
+     - 並查集進階應用
+     - 連通分量處理
+     - 路徑計數技巧
+
+#### Medium 題目
 
 1. [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/) (Medium)
 
