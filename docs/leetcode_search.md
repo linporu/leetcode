@@ -295,7 +295,9 @@ def solve_n_queens(n):
 
 ## 練習題目
 
-### 1. 二分搜尋練習（由易到難）
+### 1. 二分搜尋練習
+
+#### Easy 題目
 
 1. [704. Binary Search](https://leetcode.com/problems/binary-search/) (Easy)
 
@@ -317,7 +319,19 @@ def solve_n_queens(n):
      - 邊界情況的處理
      - 搜尋範圍的調整
 
-3. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) (Medium)
+3. [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/) (Easy)
+   - 核心技巧：二分搜尋的實際應用
+   - 時間複雜度：O(log n)
+   - 空間複雜度：O(1)
+   - 學習重點：
+     - 處理數值範圍
+     - 避免整數溢出
+     - 結果的取整處理
+
+#### Medium 題目
+
+1. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) (Medium)
+
    - 核心技巧：二分搜尋邊界
    - 時間複雜度：O(log n)
    - 空間複雜度：O(1)
@@ -326,11 +340,53 @@ def solve_n_queens(n):
      - 二分搜尋的變體
      - 重複元素的處理
 
+2. [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) (Medium)
+   - 核心技巧：旋轉數組的二分搜尋
+   - 時間複雜度：O(log n)
+   - 空間複雜度：O(1)
+   - 學習重點：
+     - 處理旋轉數組
+     - 判斷有序區間
+     - 分段搜尋策略
+
 ### 2. 深度優先搜尋練習
+
+#### Easy 題目
+
+1. [100. Same Tree](https://leetcode.com/problems/same-tree/) (Easy)
+
+   - 核心技巧：基本樹狀 DFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)，h 為樹高
+   - 學習重點：
+     - 遞迴的基本概念
+     - 樹的遍歷方式
+     - 節點比較邏輯
+
+2. [112. Path Sum](https://leetcode.com/problems/path-sum/) (Easy)
+
+   - 核心技巧：路徑追蹤 DFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)，h 為樹高
+   - 學習重點：
+     - 路徑和的計算
+     - 終止條件的判斷
+     - 遞迴參數的傳遞
+
+3. [257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/) (Easy)
+   - 核心技巧：路徑記錄 DFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)，h 為樹高
+   - 學習重點：
+     - 路徑的字串表示
+     - 回溯處理
+     - 結果的收集方式
+
+#### Medium 題目
 
 1. [200. Number of Islands](https://leetcode.com/problems/number-of-islands/) (Medium)
 
-   - 核心技巧：DFS 網格搜尋
+   - 核心技巧：網格 DFS
    - 時間複雜度：O(m \* n)
    - 空間複雜度：O(m \* n)
    - 學習重點：
@@ -339,7 +395,6 @@ def solve_n_queens(n):
      - 連通區域的計數
 
 2. [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) (Medium)
-
    - 核心技巧：邊界 DFS
    - 時間複雜度：O(m \* n)
    - 空間複雜度：O(m \* n)
@@ -348,38 +403,43 @@ def solve_n_queens(n):
      - 狀態的標記與更新
      - 條件判斷的處理
 
-3. [79. Word Search](https://leetcode.com/problems/word-search/) (Medium)
-   - 核心技巧：回溯 DFS
-   - 時間複雜度：O(m _ n _ 4^L)，L 為單字長度
-   - 空間複雜度：O(L)
-   - 學習重點：
-     - 路徑搜尋與回溯
-     - 訪問標記的管理
-     - 搜尋的剪枝優化
-
 ### 3. 廣度優先搜尋練習
 
-1. [127. Word Ladder](https://leetcode.com/problems/word-ladder/) (Hard)
+#### Easy 題目
 
-   - 核心技巧：BFS 最短路徑
-   - 時間複雜度：O(N _ 26 _ L)，N 為單字數量，L 為單字長度
-   - 空間複雜度：O(N)
+1. [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/) (Easy)
+
+   - 核心技巧：層次遍歷 BFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)，w 為樹的最大寬度
    - 學習重點：
-     - 狀態轉換的 BFS
+     - 層次遍歷的實現
      - 最短路徑的尋找
-     - 效率優化技巧
+     - 終止條件的判斷
 
-2. [752. Open the Lock](https://leetcode.com/problems/open-the-lock/) (Medium)
+2. [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) (Easy)
 
-   - 核心技巧：狀態空間 BFS
-   - 時間複雜度：O(10000)
-   - 空間複雜度：O(10000)
+   - 核心技巧：層次統計 BFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)，w 為樹的最大寬度
    - 學習重點：
-     - 狀態空間的表示
-     - 死鎖狀態的處理
-     - 最短步數的計算
+     - 層次資料的收集
+     - 平均值的計算
+     - 數值溢出的處理
 
-3. [542. 01 Matrix](https://leetcode.com/problems/01-matrix/) (Medium)
+3. [993. Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/) (Easy)
+   - 核心技巧：節點關係 BFS
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)，w 為樹的最大寬度
+   - 學習重點：
+     - 節點深度的追蹤
+     - 父節點的記錄
+     - 表親關係的判斷
+
+#### Medium 題目
+
+1. [542. 01 Matrix](https://leetcode.com/problems/01-matrix/) (Medium)
+
    - 核心技巧：多源 BFS
    - 時間複雜度：O(m \* n)
    - 空間複雜度：O(m \* n)
@@ -387,3 +447,12 @@ def solve_n_queens(n):
      - 多源點 BFS
      - 距離的更新
      - 佇列的使用技巧
+
+2. [994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) (Medium)
+   - 核心技巧：時間推進 BFS
+   - 時間複雜度：O(m \* n)
+   - 空間複雜度：O(m \* n)
+   - 學習重點：
+     - 腐爛過程的模擬
+     - 時間的計算
+     - 終止條件的判斷

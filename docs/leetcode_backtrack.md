@@ -134,29 +134,41 @@ def combination_sum(candidates, target, path, start):
 
 ## 練習題目
 
-### 1. 基礎回溯練習（由易到難）
+### 1. 基礎回溯練習（Easy）
 
-1. [77. Combinations](https://leetcode.com/problems/combinations/) (Medium)
+1. [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) (Easy)
 
-   - 核心技巧：基本組合回溯
-   - 時間複雜度：O(C(n,k))
-   - 空間複雜度：O(k)
+   - 核心技巧：樹的前序遍歷
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)，h 為樹高
    - 學習重點：
      - 基本回溯框架的應用
-     - 組合問題的處理
-     - 避免重複組合的技巧
+     - 遞迴與迭代的實現
+     - 理解回溯的基本概念
 
-2. [46. Permutations](https://leetcode.com/problems/permutations/) (Medium)
+2. [257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/) (Easy)
 
-   - 核心技巧：基本排列回溯
-   - 時間複雜度：O(n!)
-   - 空間複雜度：O(n)
+   - 核心技巧：路徑收集
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
    - 學習重點：
-     - 排列問題的實現
-     - 已使用元素的標記
-     - 狀態恢復的處理
+     - 路徑的追蹤與收集
+     - 字串處理技巧
+     - 回溯時的狀態維護
 
-3. [78. Subsets](https://leetcode.com/problems/subsets/) (Medium)
+3. [112. Path Sum](https://leetcode.com/problems/path-sum/) (Easy)
+   - 核心技巧：路徑和檢查
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 目標值的追蹤
+     - 葉節點的判斷
+     - 路徑完整性驗證
+
+### 2. 進階回溯練習（Medium）
+
+1. [78. Subsets](https://leetcode.com/problems/subsets/) (Medium)
+
    - 核心技巧：子集生成
    - 時間複雜度：O(2^n)
    - 空間複雜度：O(n)
@@ -165,9 +177,27 @@ def combination_sum(candidates, target, path, start):
      - 選擇與不選擇的處理
      - 結果收集的時機
 
-### 2. 進階回溯練習
+2. [46. Permutations](https://leetcode.com/problems/permutations/) (Medium)
 
-1. [39. Combination Sum](https://leetcode.com/problems/combination-sum/) (Medium)
+   - 核心技巧：排列生成
+   - 時間複雜度：O(n!)
+   - 空間複雜度：O(n)
+   - 學習重點：
+     - 排列問題的實現
+     - 已使用元素的標記
+     - 狀態恢復的處理
+
+3. [77. Combinations](https://leetcode.com/problems/combinations/) (Medium)
+
+   - 核心技巧：組合生成
+   - 時間複雜度：O(C(n,k))
+   - 空間複雜度：O(k)
+   - 學習重點：
+     - 組合問題的處理
+     - 避免重複組合的技巧
+     - 剪枝優化
+
+4. [39. Combination Sum](https://leetcode.com/problems/combination-sum/) (Medium)
 
    - 核心技巧：無限重複選擇
    - 時間複雜度：O(n^(target/min))
@@ -177,28 +207,7 @@ def combination_sum(candidates, target, path, start):
      - 和為目標值的組合
      - 剪枝優化
 
-2. [51. N-Queens](https://leetcode.com/problems/n-queens/) (Hard)
-
-   - 核心技巧：約束滿足問題
-   - 時間複雜度：O(n!)
-   - 空間複雜度：O(n)
-   - 學習重點：
-     - 棋盤狀態的表示
-     - 有效性檢查
-     - 解的表示方法
-
-3. [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) (Hard)
-   - 核心技巧：數獨求解
-   - 時間複雜度：O(9^m)，m 為空格數
-   - 空間複雜度：O(1)
-   - 學習重點：
-     - 狀態檢查的優化
-     - 多重約束的處理
-     - 提前剪枝的技巧
-
-### 3. 特殊回溯練習
-
-1. [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/) (Medium)
+5. [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/) (Medium)
 
    - 核心技巧：字符串分割
    - 時間複雜度：O(1)
@@ -208,7 +217,7 @@ def combination_sum(candidates, target, path, start):
      - 分段處理
      - 邊界條件的處理
 
-2. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/) (Medium)
+6. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/) (Medium)
 
    - 核心技巧：字符串分割與回文判斷
    - 時間複雜度：O(n \* 2^n)
@@ -218,7 +227,7 @@ def combination_sum(candidates, target, path, start):
      - 動態規劃優化
      - 結果收集的處理
 
-3. [47. Permutations II](https://leetcode.com/problems/permutations-ii/) (Medium)
+7. [47. Permutations II](https://leetcode.com/problems/permutations-ii/) (Medium)
    - 核心技巧：重複元素的排列
    - 時間複雜度：O(n!)
    - 空間複雜度：O(n)
