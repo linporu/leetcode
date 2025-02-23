@@ -9,16 +9,22 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+# Recursive
+class Solution01:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        def bst(node):
-            if not node:
-                return None
-            if node.val == val:
-                return node
-            elif node.val > val:
-                return bst(node.left)
-            else:
-                return bst(node.right)
+        if not root:
+            return None
+        if root.val == val:
+            return root
+        elif root.val > val:
+            return self.searchBST(root.left, val)
+        else:
+            return self.searchBST(root.right, val)
 
-        return bst(root)
+
+# Iterative
+class Solution02:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        while root and root.val != val:
+            root = root.left if root.val > val else root.right
+        return root
