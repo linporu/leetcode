@@ -1,7 +1,7 @@
 """
 回溯算法模板 (Backtracking Template)
 
-回溯算法的本質是在決策樹上進行深度優先搜索 (DFS)。
+回溯算法的本質是在 N-ary 決策樹上進行深度優先搜索 (DFS)。
 主要應用於排列、組合、子集等問題。
 
 基本步驟：
@@ -32,7 +32,7 @@ class BacktrackingTemplate:
         def backtrack(path: List[int], choices: Set[int]):
             # 達到目標（終止條件）
             if len(path) == len(nums):
-                self.results.append(path[:])  # 重要：要創建一個副本
+                self.results.append(path.copy())  # 重要：要創建一個副本
                 return
 
             # 遍歷所有可能的選擇
@@ -78,7 +78,7 @@ class BacktrackingTemplate:
 
             # 達到目標
             if len(path) == len(nums):
-                self.results.append(path[:])
+                self.results.append(path.copy())
                 continue
 
             # 將剩餘的選擇轉換為列表以便索引
