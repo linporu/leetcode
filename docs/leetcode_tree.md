@@ -259,6 +259,269 @@ result.append(node.val)
      - 迭代實現
      - 效率分析
 
+### 5. N 叉樹練習（N-ary Tree）
+
+#### N 叉樹的特性與挑戰
+
+- **節點結構差異**：每個節點可以有多個子節點，而非僅有左右兩個
+- **遍歷方式調整**：需要處理多個子節點的遍歷順序
+- **無中序遍歷**：N 叉樹沒有明確的中序遍歷定義
+- **深度與廣度優先搜索**：實現方式需要適應多子節點的特性
+
+#### N 叉樹節點定義
+
+```python
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children if children is not None else []
+```
+
+#### 練習題目
+
+1. [589. N-ary Tree Preorder Traversal](https://leetcode.com/problems/n-ary-tree-preorder-traversal/) (Easy)
+
+   - 核心技巧：N 叉樹前序遍歷
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)，h 為樹高
+   - 學習重點：
+     - 處理多子節點的遍歷
+     - 遞迴與迭代實現的差異
+     - 堆疊使用方式的調整
+
+2. [590. N-ary Tree Postorder Traversal](https://leetcode.com/problems/n-ary-tree-postorder-traversal/) (Easy)
+
+   - 核心技巧：N 叉樹後序遍歷
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 後序遍歷的實現方式
+     - 子節點處理順序的重要性
+     - 迭代解法的複雜度
+
+3. [429. N-ary Tree Level Order Traversal](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) (Medium)
+
+   - 核心技巧：N 叉樹層序遍歷
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)，w 為最寬層的節點數
+   - 學習重點：
+     - 隊列在層序遍歷中的應用
+     - 層級資訊的維護方式
+     - 與二元樹層序遍歷的異同
+
+4. [559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/) (Easy)
+
+   - 核心技巧：深度計算
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 深度計算的遞迴實現
+     - 多子節點的最大值比較
+     - 迭代解法的實現方式
+
+5. [431. Encode N-ary Tree to Binary Tree](https://leetcode.com/problems/encode-n-ary-tree-to-binary-tree/) (Hard)
+
+   - 核心技巧：樹結構轉換
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 不同樹結構間的轉換思路
+     - 編碼與解碼的對應關係
+     - 保持結構信息的完整性
+
+#### N 叉樹解題模板
+
+```python
+from typing import List
+from collections import deque
+
+# 前序遍歷（遞迴）
+def preorder_recursive(root):
+    """N 叉樹前序遍歷（遞迴）- 根->子節點"""
+    result = []
+
+    def dfs(node):
+        if not node:
+            return
+        result.append(node.val)  # 訪問根節點
+        for child in node.children:  # 遍歷所有子節點
+            dfs(child)
+
+    dfs(root)
+    return result
+
+# 前序遍歷（迭代）
+def preorder_iterative(root):
+    """N 叉樹前序遍歷（迭代）- 根->子節點"""
+    if not root:
+        return []
+
+    result = []
+    stack = [root]
+
+    while stack:
+        node = stack.pop()
+        result.append(node.val)
+        # 注意：因為是堆疊（後進先出），所以要倒序加入子節點
+        for child in reversed(node.children):
+            stack.append(child)
+
+    return result
+
+# 後序遍歷（遞迴）
+def postorder_recursive(root):
+    """N 叉樹後序遍歷（遞迴）- 子節點->根"""
+    result = []
+
+    def dfs(node):
+        if not node:
+            return
+        for child in node.children:  # 先遍歷所有子節點
+            dfs(child)
+        result.append(node.val)  # 最後訪問根節點
+
+    dfs(root)
+    return result
+
+# 層序遍歷
+def levelorder(root):
+    """N 叉樹層序遍歷"""
+    if not root:
+        return []
+
+    result = []
+    queue = deque([root])
+
+    while queue:
+        level_size = len(queue)
+        current_level = []
+
+        for _ in range(level_size):
+            node = queue.popleft()
+            current_level.append(node.val)
+
+            for child in node.children:
+                queue.append(child)
+
+        result.append(current_level)
+
+    return result
+
+# 計算樹的最大深度
+def max_depth(root):
+    """計算 N 叉樹的最大深度"""
+    if not root:
+        return 0
+
+    if not root.children:
+        return 1
+
+    # 找出所有子樹中的最大深度
+    max_child_depth = 0
+    for child in root.children:
+        max_child_depth = max(max_child_depth, max_depth(child))
+
+    # 當前節點的深度 = 最大子樹深度 + 1
+    return max_child_depth + 1
+```
+
+#### 更多簡單的 N 叉樹題目
+
+6. [1302. Deepest Leaves Sum](https://leetcode.com/problems/deepest-leaves-sum/) (Medium)
+
+   - 核心技巧：層序遍歷 + 深度追蹤
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(w)
+   - 學習重點：
+     - 識別最深層的節點
+     - 層序遍歷的應用
+     - 深度與節點值的結合處理
+
+7. [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/) (Easy)
+
+   - 核心技巧：樹的比較
+   - 時間複雜度：O(m\*n)，m 和 n 分別為兩棵樹的節點數
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 子樹判斷的條件
+     - 遞迴比較的實現
+     - 優化比較過程
+
+8. [993. Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/) (Easy)
+
+   - 核心技巧：節點關係判斷
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 節點深度的計算
+     - 父節點的識別
+     - 堂兄弟關係的判定
+
+9. [1448. Count Good Nodes in Binary Tree](https://leetcode.com/problems/count-good-nodes-in-binary-tree/) (Medium)
+
+   - 核心技巧：路徑最大值追蹤
+   - 時間複雜度：O(n)
+   - 空間複雜度：O(h)
+   - 學習重點：
+     - 路徑上的值比較
+     - 遞迴參數的傳遞
+     - 計數條件的設計
+
+#### N 叉樹解題技巧
+
+1. **子節點處理順序**
+
+   - 前序遍歷：先處理當前節點，再處理子節點
+   - 後序遍歷：先處理所有子節點，再處理當前節點
+   - 迭代實現時，注意堆疊的壓入順序（通常需要倒序）
+
+2. **遞迴到迭代的轉換**
+
+   - 使用堆疊模擬系統調用堆疊
+   - 前序遍歷：直接處理當前節點，再壓入子節點（倒序）
+   - 後序遍歷：可以考慮「前序遍歷的倒序」技巧
+
+3. **層序遍歷的實現**
+
+   - 使用隊列（Queue）而非堆疊
+   - 記錄每一層的大小，以便分層處理
+   - 處理當前節點後，將所有子節點加入隊列
+
+4. **狀態追蹤技巧**
+
+   - 路徑問題：傳遞當前路徑狀態（如和、最大值等）
+   - 深度問題：傳遞當前深度或從子節點返回深度
+   - 關係問題：記錄父節點、兄弟節點或其他關係
+
+5. **N 叉樹與二元樹的轉換**
+   - 左子節點：指向第一個子節點
+   - 右子節點：指向兄弟節點
+   - 這種轉換可以讓二元樹算法應用於 N 叉樹
+
+```python
+# N 叉樹轉二元樹的示例
+def encode(root):
+    """將 N 叉樹編碼為二元樹"""
+    if not root:
+        return None
+
+    binary_root = TreeNode(root.val)
+
+    if not root.children:
+        return binary_root
+
+    # 第一個子節點作為左子節點
+    binary_root.left = encode(root.children[0])
+
+    # 構建兄弟鏈（右子節點指向兄弟）
+    current = binary_root.left
+    for i in range(1, len(root.children)):
+        current.right = encode(root.children[i])
+        current = current.right
+
+    return binary_root
+```
+
 ## Python 解題模板
 
 ### 1. 樹節點定義
@@ -502,6 +765,8 @@ def search_bst(root, val):
 3. 第三週：樹的對稱與比較 (100, 101)
 4. 第四週：路徑相關問題 (112, 257)
 5. 第五週：BST 特性與操作 (98, 700)
+6. 第六週：N 叉樹基礎 (589, 590, 429)
+7. 第七週：N 叉樹進階應用 (559, 1302, 431)
 
 ### 2. 學習方法
 
@@ -516,3 +781,35 @@ def search_bst(root, val):
 2. 關注空間複雜度的優化
 3. 嘗試將遞迴解法改寫為迭代
 4. 理解並實現 Morris 遍歷
+
+### 4. N 叉樹學習建議
+
+1. **學習順序**
+
+   - 先掌握基本的 N 叉樹遍歷（前序、後序、層序）
+   - 理解 N 叉樹與二元樹的差異和聯繫
+   - 學習如何將二元樹的解題思路應用到 N 叉樹
+
+2. **解題技巧**
+
+   - 遍歷時注意子節點的處理順序
+   - 迭代實現時特別注意堆疊/隊列的使用方式
+   - 善用「狀態追蹤」來解決複雜問題
+
+3. **常見錯誤**
+
+   - 忘記處理空節點或空子節點列表
+   - 迭代實現時子節點壓入順序錯誤
+   - 忽略 N 叉樹沒有中序遍歷的特點
+
+4. **進階方向**
+
+   - 嘗試 N 叉樹與二元樹的相互轉換
+   - 實現更高效的遍歷算法
+   - 解決涉及多棵 N 叉樹的複雜問題
+
+5. **實際應用場景**
+   - 文件系統的目錄結構
+   - 組織架構圖
+   - DOM 樹結構
+   - 多叉搜尋樹（如 B 樹、B+ 樹）
