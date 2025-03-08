@@ -244,8 +244,10 @@ class NaryTreeTraversal:
             result.append(node.val)
             # 注意：因為是使用堆疊，所以要從右到左將子節點壓入堆疊
             # 這樣出堆疊時就會從左到右處理子節點
-            for child in reversed(node.children):
-                stack.append(child)
+            for i in range(
+                len(node.children) - 1, -1, -1
+            ):  # 效果等同 reversed(node.children)，但不改變 node.children，只改變遍歷順序
+                stack.append((node.children[i], False))
 
         return result
 
@@ -267,8 +269,10 @@ class NaryTreeTraversal:
                 # 重新壓入當前節點，標記為已訪問
                 stack.append((node, True))
                 # 從右到左將子節點壓入堆疊
-                for child in reversed(node.children):
-                    stack.append((child, False))
+                for i in range(
+                    len(node.children) - 1, -1, -1
+                ):  # 效果等同 reversed(node.children)，但不改變 node.children，只改變遍歷順序
+                    stack.append((node.children[i], False))
 
         return result
 
