@@ -83,5 +83,38 @@ class Solution02:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-        
+
         return deepest_leaves_sum
+
+
+# Recursive DFS
+class Solution03:
+    def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+        """
+        使用 DFS 配合遞迴，記錄目前深度和最大深度。
+        當發現更深的葉子節點時，重置 sum。
+        當深度等於最大深度時，累加節點值。
+        """
+        max_depth = 0
+        deepest_sum = 0
+
+        def dfs(node: TreeNode, depth: int) -> None:
+            if not node:
+                return
+
+            nonlocal max_depth, deepest_sum
+
+            # 更新最大深度和重置 sum
+            if depth > max_depth:
+                max_depth = depth
+                deepest_sum = node.val
+            # 在最大深度累加節點值
+            elif depth == max_depth:
+                deepest_sum += node.val
+
+            # 遞迴處理左右子樹
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+
+        dfs(root, 0)
+        return deepest_sum
