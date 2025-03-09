@@ -45,3 +45,31 @@ class Solution02:
                 stack.append((new_path, new_choices))
 
         return result
+
+
+# Optimized solution
+class Solution03:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        def backtrack(start: int, curr: List[int]):
+            if len(curr) == k:
+                result.append(curr[:])  # 這裡還是需要複製，因為curr會被修改
+                return
+
+            # 優化：計算還需要幾個數字，確保有足夠的數字可以選
+            # n - i + 1 >= k - len(curr)
+            for i in range(start, n - (k - len(curr)) + 2):
+                curr.append(i)
+                backtrack(i + 1, curr)
+                curr.pop()
+
+        result = []
+        backtrack(1, [])
+        return result
+
+
+# Itertools solution
+class Solution04:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        import itertools
+
+        return list(map(list, itertools.combinations([i for i in range(1, n + 1)], k)))
