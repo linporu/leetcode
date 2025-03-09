@@ -87,8 +87,64 @@ class Solution02:
         return result
 
 
-# Itertools Approach
+# Iterative Approach
 class Solution03:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        """使用迭代式方法生成所有排列（Iterative Approach）
+
+        思路：
+        1. 使用堆疊來模擬遞迴
+        2. 每個堆疊項目包含：
+           - 當前的路徑 (path)
+           - 剩餘可用的數字索引 (remained_indexes)
+        3. 使用迭代方式處理堆疊，直到堆疊為空
+
+        優勢：
+        1. 避免遞迴調用的開銷
+        2. 在某些情況下可能比遞迴更快
+        3. 不會有堆疊溢出的風險
+
+        時間複雜度：O(n!)
+        空間複雜度：O(n * n!)，需要存儲所有狀態
+
+        示例：
+        對於 nums = [1, 2]：
+
+        堆疊操作過程：
+        1. ([],     [0,1])         # 初始狀態
+        2. ([1],    [1])           # 選擇 index 0
+        3. ([1,2],  [])           # 選擇 index 1，得到第一個排列 [1,2]
+        4. ([2],    [0])           # 回溯到選擇 index 1
+        5. ([2,1],  [])           # 選擇 index 0，得到第二個排列 [2,1]
+        """
+        if not nums:
+            return []
+
+        result = []
+        n = len(nums)
+
+        # 堆疊項目格式：(current_path, remained_indexes)
+        stack = [([], list(range(n)))]
+
+        while stack:
+            path, remained_indexes = stack.pop()
+
+            # 如果沒有剩餘的數字，表示找到一個完整的排列
+            if not remained_indexes:
+                result.append([nums[i] for i in path])
+                continue
+
+            # 注意：我們需要反向遍歷，因為使用堆疊（後進先出）
+            for i in range(len(remained_indexes) - 1, -1, -1):
+                next_remained = remained_indexes[:i] + remained_indexes[i + 1:]
+                next_path = path + [remained_indexes[i]]
+                stack.append((next_path, next_remained))
+
+        return result
+
+
+# Itertools Approach
+class Solution04:
     def permute(self, nums: List[int]) -> List[List[int]]:
         """使用 Python 內建的 itertools 模組生成排列（Itertools Approach）
 
