@@ -4,7 +4,7 @@
 
 ### 1. 回溯演算法的基本概念
 
-- 回溯算法本質上是 DFS 的一種應用
+- 回溯算法本質上是在一棵多叉樹 (N-ary Tree) 上進行 DFS，在窮舉過程中透過 pruning 加速效率的問題解決方式。
 
 - 使用時機：
   - 需要列舉所有可能的解
@@ -15,40 +15,6 @@
   - 設計有效的狀態記錄
   - 正確實作「選擇」與「撤銷」
   - 善用剪枝優化效能
-
-### 1.1 回溯演算法與多叉樹 (N-ary Tree) 的關係
-
-回溯演算法可以視為在一棵多叉樹 (N-ary Tree) 上進行深度優先遍歷 (DFS) 的過程。這種理解方式有助於我們更直觀地思考回溯問題。
-
-#### 多叉樹模型
-
-在回溯問題中，我們可以將探索過程想像成遍歷一棵多叉樹：
-
-- 樹的根節點：初始狀態（通常是空集或起始點）
-- 樹的每一層：代表做出的一個決策
-- 每個節點的分支：代表當前狀態下的所有可能選擇
-- 葉子節點：代表一個完整的解或終止狀態
-
-#### 以子集問題為例 (LeetCode 78. Subsets)
-
-對於輸入 `nums = [1, 2, 3]`，我們可以將生成所有子集的過程視為遍歷以下多叉樹：
-
-```
-                    []
-                /    |    \
-              [1]   [2]   [3]
-             /  \     \
-         [1,2] [1,3]  [2,3]
-           /
-      [1,2,3]
-```
-
-在這棵樹中：
-
-- 根節點是空集 `[]`
-- 第一層有 3 個節點，分別代表選擇元素 1、2 或 3
-- 第二層的分支數量減少，因為我們只考慮當前元素之後的元素（避免重複）
-- 每個節點都代表一個有效的子集
 
 ### 2. 回溯算法模板
 
@@ -147,141 +113,6 @@ def backtrack_iterative(choices):
 2. 需要更好的狀態控制和觀察時
 3. 需要避免堆疊溢出的風險時
 4. 問題的狀態轉換較為直觀時
-
-#### 常見變體
-
-##### 1. 組合問題模板
-
-```python
-def combination(n, k, start, path):
-    if len(path) == k:
-        result.append(path[:])
-        return
-
-    for i in range(start, n + 1):
-        path.append(i)
-        combination(n, k, i + 1, path)  # 從 i + 1 開始，避免重複
-        path.pop()
-```
-
-迭代式實現：
-
-```python
-def combination_iterative(n, k):
-    result = []
-    # 堆疊項目：(current_path, start)
-    stack = [([], 1)]
-
-    while stack:
-        path, start = stack.pop()
-
-        # 找到一個有效組合
-        if len(path) == k:
-            result.append(path[:])
-            continue
-
-        # 注意：反向遍歷以保持與遞迴版本相同的順序
-        for i in range(n, start - 1, -1):
-            stack.append((path + [i], i + 1))
-
-    return result
-```
-
-##### 2. 排列問題模板
-
-```python
-def permutation(nums, path, used):
-    if len(path) == len(nums):
-        result.append(path[:])
-        return
-
-    for i in range(len(nums)):
-        if used[i]:
-            continue
-
-        used[i] = True
-        path.append(nums[i])
-        permutation(nums, path, used)
-        path.pop()
-        used[i] = False
-```
-
-迭代式實現：
-
-```python
-def permutation_iterative(nums):
-    if not nums:
-        return []
-
-    result = []
-    n = len(nums)
-
-    # 堆疊項目：(current_path, used_set)
-    stack = [([], set())]
-
-    while stack:
-        path, used = stack.pop()
-
-        if len(path) == len(nums):
-            result.append(path[:])
-            continue
-
-        # 反向遍歷以保持與遞迴版本相同的順序
-        for i in range(n - 1, -1, -1):
-            if i not in used:
-                stack.append((path + [nums[i]], used | {i}))
-
-    return result
-```
-
-##### 3. 子集問題模版
-
-```python
-def subsets(nums):
-    result = []
-
-    def backtrack(start, path):
-        # 每個節點都是一個有效的子集
-        result.append(path.copy())
-
-        # 從 start 開始，嘗試添加每個剩餘元素（探索每個分支）
-        for i in range(start, len(nums)):
-            # 選擇一個分支
-            path.append(nums[i])
-
-            # 遞迴探索該分支（只考慮當前元素之後的元素，避免重複）
-            backtrack(i + 1, path)
-
-            # 回溯，撤銷選擇，準備探索下一個分支
-            path.pop()
-
-    backtrack(0, [])
-    return result
-```
-
-迭代式實現：
-
-```python
-def subsets_iterative(nums):
-    if not nums:
-        return [[]]
-
-    result = []
-    # 堆疊項目：(current_path, start_index)
-    stack = [([], 0)]
-
-    while stack:
-        path, start = stack.pop()
-
-        # 每個路徑都是一個有效的子集
-        result.append(path[:])
-
-        # 反向遍歷以保持與遞迴版本相同的順序
-        for i in range(len(nums) - 1, start - 1, -1):
-            stack.append((path + [nums[i]], i + 1))
-
-    return result
-```
 
 ### 3. 回溯優化技巧
 
@@ -416,10 +247,9 @@ def combination_sum_iterative(candidates, target):
             result.append(path[:])
             continue
 
-        # 反向遍歷以保持與遞迴版本相同的順序
-        for i in range(len(candidates) - 1, start - 1, -1):
+        for i in range(start, len(candidates)):
             if candidates[i] > remain:  # 剪枝：當前數字太大
-                continue
+                break
 
             new_remain = remain - candidates[i]
             if new_remain >= 0:  # 可行性檢查
@@ -531,3 +361,140 @@ def combination_sum_iterative(candidates, target):
      - 重複元素的處理
      - 排序與剪枝
      - 去重技巧的應用
+
+## 附錄
+
+### 常見變體模版
+
+#### 1. 組合問題模板
+
+```python
+def combination(n, k, start, path):
+    if len(path) == k:
+        result.append(path[:])
+        return
+
+    for i in range(start, n + 1):
+        path.append(i)
+        combination(n, k, i + 1, path)  # 從 i + 1 開始，避免重複
+        path.pop()
+```
+
+迭代式實現：
+
+```python
+def combination_iterative(n, k):
+    result = []
+    # 堆疊項目：(current_path, start)
+    stack = [([], 1)]
+
+    while stack:
+        path, start = stack.pop()
+
+        # 找到一個有效組合
+        if len(path) == k:
+            result.append(path[:])
+            continue
+
+        # 注意：反向遍歷以保持與遞迴版本相同的順序
+        for i in range(n, start - 1, -1):
+            stack.append((path + [i], i + 1))
+
+    return result
+```
+
+#### 2. 排列問題模板
+
+```python
+def permutation(nums, path, used):
+    if len(path) == len(nums):
+        result.append(path[:])
+        return
+
+    for i in range(len(nums)):
+        if used[i]:
+            continue
+
+        used[i] = True
+        path.append(nums[i])
+        permutation(nums, path, used)
+        path.pop()
+        used[i] = False
+```
+
+迭代式實現：
+
+```python
+def permutation_iterative(nums):
+    if not nums:
+        return []
+
+    result = []
+    n = len(nums)
+
+    # 堆疊項目：(current_path, used_set)
+    stack = [([], set())]
+
+    while stack:
+        path, used = stack.pop()
+
+        if len(path) == len(nums):
+            result.append(path[:])
+            continue
+
+        # 反向遍歷以保持與遞迴版本相同的順序
+        for i in range(n - 1, -1, -1):
+            if i not in used:
+                stack.append((path + [nums[i]], used | {i}))
+
+    return result
+```
+
+#### 3. 子集問題模版
+
+```python
+def subsets(nums):
+    result = []
+
+    def backtrack(start, path):
+        # 每個節點都是一個有效的子集
+        result.append(path.copy())
+
+        # 從 start 開始，嘗試添加每個剩餘元素（探索每個分支）
+        for i in range(start, len(nums)):
+            # 選擇一個分支
+            path.append(nums[i])
+
+            # 遞迴探索該分支（只考慮當前元素之後的元素，避免重複）
+            backtrack(i + 1, path)
+
+            # 回溯，撤銷選擇，準備探索下一個分支
+            path.pop()
+
+    backtrack(0, [])
+    return result
+```
+
+迭代式實現：
+
+```python
+def subsets_iterative(nums):
+    if not nums:
+        return [[]]
+
+    result = []
+    # 堆疊項目：(current_path, start_index)
+    stack = [([], 0)]
+
+    while stack:
+        path, start = stack.pop()
+
+        # 每個路徑都是一個有效的子集
+        result.append(path[:])
+
+        # 反向遍歷以保持與遞迴版本相同的順序
+        for i in range(len(nums) - 1, start - 1, -1):
+            stack.append((path + [nums[i]], i + 1))
+
+    return result
+```
