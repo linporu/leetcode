@@ -1,5 +1,6 @@
-# Cursor rules
+# IDE rules
 .cursorrules
+.windsurfrules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
