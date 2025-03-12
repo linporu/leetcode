@@ -90,7 +90,7 @@ def backtrack_iterative(choices):
 
         # 直接遍歷剩餘的選擇集合
         for choice in remaining:
-            # 創建新的路徑和剩餘選擇集合
+            # 創建新的路徑和剩餘選擇集合，不要修改原路徑，以免後面壓入堆疊時重置 reference
             new_path = path + [choice]
             new_remaining = remaining - {choice}
 
