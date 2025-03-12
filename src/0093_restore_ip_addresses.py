@@ -1,8 +1,12 @@
 from typing import List
 
 
-class Solution:
+# Iterative DFS
+class Solution01:
     def restoreIpAddresses(self, s: str) -> List[str]:
+        """
+        把問題視為「用 1 or 2 or 3 個數字，4 次內湊出 len(s)，這就是個可行的分割方式」
+        """
 
         def split_string_as(path: List[int]) -> List[str]:
 
@@ -77,4 +81,48 @@ class Solution:
                 new_path.append(i)
                 stack.append((new_path, new_sum, new_num))
 
+        return result
+
+
+class Solution02:
+
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        if len(s) < 4 or len(s) > 12:
+            return []
+
+        result = []
+
+        def backtrack(start: int, dots: int, current_ip: str):
+            # 如果已經放置了3個點，且剩餘的字串是合法的，則添加到結果中
+            if dots == 3:
+                segment = s[start:]
+                # 直接檢查最後一個段落是否合法
+                if is_valid_segment(segment):
+                    result.append(current_ip + segment)
+                return
+
+            # 剩餘字符不足以形成有效IP
+            remaining = len(s) - start
+            if remaining < (4 - dots) or remaining > (4 - dots) * 3:  # 4 - dots：還需要處理的段落數
+                return
+
+            # 嘗試放置點的位置
+            for i in range(1, min(4, remaining + 1)):
+                segment = s[start: start + i]
+                if is_valid_segment(segment):
+                    backtrack(start + i, dots + 1, current_ip + segment + '.')
+
+        def is_valid_segment(segment: str) -> bool:
+            # 空字串不合法
+            if not segment:
+                return False
+
+            # 長度超過1且有前導零不合法
+            if len(segment) > 1 and segment[0] == '0':
+                return False
+
+            # 數值範圍檢查
+            return 0 <= int(segment) <= 255
+
+        backtrack(0, 0, '')
         return result
