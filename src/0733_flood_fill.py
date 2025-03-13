@@ -4,24 +4,27 @@ from typing import List
 # Recursive DFS
 class Solution01:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+
         def flood(r, c, starting_color, visited):
+            # 如果已經訪問過或超出邊界或顏色不符合，直接返回
             if (r, c) in visited:
                 return
-            else:
-                image[r][c] = color
-                visited.add((r, c))
+            if r < 0 or r >= len(image):
+                return
+            if c < 0 or c >= len(image[0]):
+                return
+            if image[r][c] != starting_color:
+                return
 
-            m = len(image)
-            n = len(image[0])
+            # 執行填色並標記為已訪問
+            image[r][c] = color
+            visited.add((r, c))
 
-            if r + 1 < m and image[r + 1][c] == starting_color:
-                flood(r + 1, c, starting_color, visited)
-            if r - 1 >= 0 and image[r - 1][c] == starting_color:
-                flood(r - 1, c, starting_color, visited)
-            if c + 1 < n and image[r][c + 1] == starting_color:
-                flood(r, c + 1, starting_color, visited)
-            if c - 1 >= 0 and image[r][c - 1] == starting_color:
-                flood(r, c - 1, starting_color, visited)
+            # 遞迴訪問四個方向
+            flood(r + 1, c, starting_color, visited)
+            flood(r - 1, c, starting_color, visited)
+            flood(r, c + 1, starting_color, visited)
+            flood(r, c - 1, starting_color, visited)
 
         starting_color = image[sr][sc]
         visited = set()
