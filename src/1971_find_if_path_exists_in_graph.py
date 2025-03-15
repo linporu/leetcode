@@ -27,3 +27,31 @@ class Solution:
         visited = set()
 
         return dfs(source, visited)
+
+
+# Iterative DFS
+class Solution02:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+
+        # 構建鄰接表
+        adj = {i: [] for i in range(n)}
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        visited = set()
+        stack = [source]
+
+        while stack:
+            node = stack.pop()
+
+            if node == destination:
+                return True
+
+            if node not in visited:
+                visited.add(node)
+                for next_node in adj[node]:
+                    if next_node not in visited:
+                        stack.append(next_node)
+
+        return False
