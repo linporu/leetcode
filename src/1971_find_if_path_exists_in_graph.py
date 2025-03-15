@@ -55,3 +55,31 @@ class Solution02:
                         stack.append(next_node)
 
         return False
+
+
+# Iterative BFS
+class Solution03:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        from collections import deque
+
+        # 構建鄰接表
+        adj = {i: [] for i in range(n)}
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        visited = set([source])
+        queue = deque([source])
+
+        while queue:
+            node = queue.popleft()
+
+            if node == destination:
+                return True
+
+            for next_node in adj[node]:
+                if next_node not in visited:
+                    visited.add(next_node)
+                    queue.append(next_node)
+
+        return False
