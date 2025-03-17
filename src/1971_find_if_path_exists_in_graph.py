@@ -83,3 +83,36 @@ class Solution03:
                     queue.append(next_node)
 
         return False
+
+
+# Union-Find
+# 很省記憶體，但速度比 DFS 和 BFS 略慢
+class Solution04:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        if source == destination:
+            return True
+
+        parent = {i: i for i in range(n)}
+        rank = {i: 0 for i in range(n)}
+
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+
+        def union(x, y):
+            root_x = find(x)
+            root_y = find(y)
+            if root_x == root_y:
+                return
+
+            if rank[root_x] < rank[root_y]:
+                root_x, root_y = root_y, root_x
+            parent[root_y] = root_x
+            if rank[root_x] == rank[root_y]:
+                rank[root_x] += 1
+
+        for u, v in edges:
+            union(u, v)
+
+        return find(source) == find(destination)
