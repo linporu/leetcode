@@ -421,26 +421,26 @@ def dijkstra(graph, start):
 ### 5. 並查集模板
 
 ```python
-class UnionFind:
-    def __init__(self, n):
-        self.parent = list(range(n))
-        self.rank = [0] * n
+def union_find(n):
+    parent = list(range(n))
+    rank = [0] * n
 
-    def find(self, x):
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
+    def find(x):
+        if parent[x] != x:
+            parent[x] = find(parent[x])
+        return parent[x]
 
-    def union(self, x, y):
-        px, py = self.find(x), self.find(y)
+    def union(x, y):
+        px, py = find(x), find(y)
         if px == py:
             return False
-        if self.rank[px] < self.rank[py]:
+        if rank[px] < rank[py]:
             px, py = py, px
-        self.parent[py] = px
-        if self.rank[px] == self.rank[py]:
-            self.rank[px] += 1
+        parent[py] = px
+        if rank[px] == rank[py]:
+            rank[px] += 1
         return True
+    return find, union
 ```
 
 ## 學習建議
