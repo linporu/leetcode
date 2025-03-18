@@ -1,8 +1,9 @@
+from platform import node
 from typing import List
 
 
 # Recursive DFS
-class Solution:
+class Solution01:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
         def dfs(node, visited):
             if node == destination:
@@ -116,3 +117,36 @@ class Solution04:
             union(u, v)
 
         return find(source) == find(destination)
+
+
+# Dijkstra
+class Solution05:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        import heapq
+
+        if source == destination:
+            return True
+
+        # 構建鄰接表
+        adj = {i: [] for i in range(n)}
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        distances = {node: float("inf") for node in range(n)}
+        distances[source] = 0
+        pq = [(0, source)]
+
+        while pq:
+            curr_distance, curr_node = heapq.heappop(pq)
+
+            if curr_distance > distances[curr_node]:
+                continue
+
+            for neighbor in adj[curr_node]:
+                distance = curr_distance + 1
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(pq, (distance, neighbor))
+
+        return distances[destination] != float("inf")
