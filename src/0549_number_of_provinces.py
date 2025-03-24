@@ -5,21 +5,21 @@ from typing import List
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         n = len(isConnected)
-        visited = {i: False for i in range(n)}
+        visited = set()
         count = 0
 
         def dfs(i):
-            if visited[i]:
+            if i in visited:
                 return
 
-            visited[i] = True
+            visited.add(i)
 
             for j in range(n):
-                if isConnected[i][j] == 1 and not visited[j]:
+                if isConnected[i][j] == 1 and j not in visited:
                     dfs(j)
 
         for i in range(n):
-            if not visited[i]:
+            if i not in visited:
                 count += 1
                 dfs(i)
 
