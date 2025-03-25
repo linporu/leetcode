@@ -26,7 +26,7 @@ class Solution01:
 
 
 # Recursive DFS
-# 時間超快
+# 時間超快，因為不用一直 path.copy()
 class Solution02:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         def backtrack(node, path):
@@ -44,4 +44,30 @@ class Solution02:
 
         result = []
         backtrack(0, [0])
+        return result
+
+
+# Iterative BFS
+# 慢，空間也沒比較省
+class Solution03:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        from collections import deque
+
+        result = []
+        queue = deque([(0, [0])])  # (node, path)
+
+        while queue:
+            node, path = queue.popleft()
+
+            if node == len(graph) - 1:
+                result.append(path.copy())
+
+            if not graph[node]:
+                continue
+
+            for next_node in graph[node]:
+                new_path = path.copy()
+                new_path.append(next_node)
+                queue.append((next_node, new_path))
+
         return result
