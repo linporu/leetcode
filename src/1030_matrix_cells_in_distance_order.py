@@ -2,7 +2,7 @@ from typing import List
 
 
 # Iterative BFS
-class Solution:
+class Solution01:
     def allCellsDistOrder(
         self, rows: int, cols: int, rCenter: int, cCenter: int
     ) -> List[List[int]]:
@@ -27,5 +27,36 @@ class Solution:
             queue.extend([(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)])
             result.append([r, c])
             visited.add((r, c))
+
+        return result
+
+
+# 計算並按照距離排序（字典儲存）
+class Solution02:
+    def allCellsDistOrder(
+        self, rows: int, cols: int, rCenter: int, cCenter: int
+    ) -> List[List[int]]:
+        # 創建一個字典，key 是距離，value 是具有該距離的單元格列表
+        distance_dict = {}
+
+        # 遍歷所有單元格
+        for r in range(rows):
+            for c in range(cols):
+                # 計算曼哈頓距離
+                distance = abs(r - rCenter) + abs(c - cCenter)
+
+                # 如果該距離不在字典中，初始化為空列表
+                if distance not in distance_dict:
+                    distance_dict[distance] = []
+
+                # 將單元格加入對應距離的列表
+                distance_dict[distance].append([r, c])
+
+        # 創建結果列表
+        result = []
+
+        # 按照距離順序合併所有單元格列表
+        for distance in sorted(distance_dict.keys()):
+            result.extend(distance_dict[distance])
 
         return result
