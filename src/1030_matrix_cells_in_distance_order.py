@@ -60,3 +60,17 @@ class Solution02:
             result.extend(distance_dict[distance])
 
         return result
+
+
+# 計算並按照距離排序（直接排序陣列內元素）
+class Solution03:
+    def allCellsDistOrder(
+        self, rows: int, cols: int, rCenter: int, cCenter: int
+    ) -> List[List[int]]:
+
+        def distance(point):
+            pi, pj = point
+            return abs(pi - rCenter) + abs(pj - cCenter)
+
+        points = [(i, j) for i in range(rows) for j in range(cols)]
+        return sorted(points, key=distance)
