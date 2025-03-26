@@ -37,6 +37,11 @@
   - Floyd-Warshall 算法
   - Bellman-Ford 算法
   - 選擇合適的算法根據圖的特性
+- 算法選擇依據：
+  - BFS 適用於無權圖或權重相同的圖（所有邊的權重都是 1）
+  - Dijkstra 適用於帶權圖，特別是權重不同的情況（無負權邊）
+  - Bellman-Ford 適用於可能存在負權邊的圖
+  - Floyd-Warshall 適用於需要計算所有點對最短路徑的情況
 
 ### 4. 拓撲排序 (Topological Sort)
 
