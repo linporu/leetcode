@@ -1,17 +1,17 @@
 from typing import List
 
 
-class Solution:
+# Brutal
+class Solution01:
     def findContentChildren(self, g: List[int], s: List[int]) -> int:
-
         g.sort()
         s.sort()
         count = 0
         curr_g = 0
         curr_s = 0
 
-        for i in g:
-            for j in s:
+        for _ in g:
+            for _ in s:
                 if curr_s == len(s):
                     break
 
