@@ -9,13 +9,12 @@ class Solution:
 
         points.sort(key=lambda x: x[1])
 
-        num_baloon = len(points)
         prev_right = points[0][1]
         no_overlap_baloon = 1
 
-        for i in range(1, num_baloon):
-            if points[i][0] > prev_right:  # No overlap
+        for baloon in points[1:]:
+            if baloon[0] > prev_right:  # No overlap
                 no_overlap_baloon += 1
-                prev_right = points[i][1]
+                prev_right = baloon[1]
 
         return no_overlap_baloon
