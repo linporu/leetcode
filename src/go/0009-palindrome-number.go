@@ -1,8 +1,8 @@
-package main
+package leetcode
 
 import "strconv"
 
-func isPalindrome1(x int) bool {
+func IsPalindrome1(x int) bool {
 	if x < 0 {
 		return false
 	}
@@ -22,7 +22,7 @@ func isPalindrome1(x int) bool {
 	return true
 }
 
-func isPalindrome2(x int) bool {
+func IsPalindrome2(x int) bool {
 	if x < 0 {
 		return false
 	}
@@ -38,8 +38,8 @@ func isPalindrome2(x int) bool {
 	return reverse == x
 }
 
-// isPalindrome3 - Optimized: only reverse half of the number
-func isPalindrome3(x int) bool {
+// IsPalindrome3 - Optimized: only reverse half of the number
+func IsPalindrome3(x int) bool {
 	// Negative numbers and numbers ending with 0 (except 0 itself) are not palindromes
 	if x < 0 || (x%10 == 0 && x != 0) {
 		return false

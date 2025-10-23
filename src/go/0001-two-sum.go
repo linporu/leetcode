@@ -1,6 +1,6 @@
-package main
+package leetcode
 
-func twoSum(nums []int, target int) []int {
+func TwoSum(nums []int, target int) []int {
 	dict := map[int]int{}
 
 	for i := range nums {
