@@ -1,4 +1,4 @@
-package leetcode
+package leetcode0001
 
 func TwoSum(nums []int, target int) []int {
 	dict := map[int]int{}

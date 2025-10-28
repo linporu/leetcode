@@ -1,4 +1,4 @@
-package leetcode
+package leetcode1603
 
 /**
  * Your ParkingSystem object will be instantiated and called as such:

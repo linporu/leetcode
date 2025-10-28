@@ -1,4 +1,4 @@
-package leetcode
+package leetcode0020
 
 func IsValid(s string) bool {
 	stack := []rune{}
